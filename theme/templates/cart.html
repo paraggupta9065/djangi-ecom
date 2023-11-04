@@ -1,0 +1,102 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Cart</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+  </head>
+  <body>
+    <div class="flex flex-col items-center bg-gray-100">
+      <div
+        class="w-full sm:w-1/2 bg-white rounded-lg shadow-lg mt-8 mb-8 overflow-hidden"
+      >
+        <div class="px-4 py-6 sm:px-6">
+          <div class="flex items-start justify-between">
+            <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+              Shopping cart
+            </h2>
+          </div>
+
+          <div class="mt-8 space-y-4">
+            <div class="flow-root">
+              {% for i in products %}
+              <div class="flex py-6 border-b border-gray-200">
+                <div
+                  class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+                >
+                  <img
+                    src="../{{i.image}}"
+                    alt="Product Image"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+
+                <div class="ml-4 flex flex-1 flex-col">
+                  <div>
+                    <div
+                      class="flex justify-between text-base font-medium text-gray-900"
+                    >
+                      <h3>{{ i.name }}</h3>
+                      <p class="ml-4">₹ {{ i.price }}</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-500">
+                      {{ i.description }}
+                    </p>
+                  </div>
+                  <div class="flex flex-1 items-end justify-between text-sm">
+                    <p class="text-gray-500">Qty 1</p>
+                    <div class="flex">
+                      <button
+                        type="button"
+                        class="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+          <div class="flex justify-between text-base font-medium text-gray-900">
+            <p>Subtotal</p>
+            <p>₹ {{ cart.total }}</p>
+          </div>
+          <p class="mt-1 text-sm text-gray-500">
+            Shipping and taxes calculated at checkout.
+          </p>
+          <div class="mt-6">
+            <a
+              href="#"
+              class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              >Checkout</a
+            >
+          </div>
+          <div
+            class="mt-6 flex justify-center text-center text-sm text-gray-500"
+          >
+            <p>
+              or
+              <button
+                type="button"
+                class="font-medium text-indigo-600 hover:text-indigo-500"
+                onclick="document.location='/'"
+              >
+                Continue Shopping
+                <span aria-hidden="true"> &rarr;</span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

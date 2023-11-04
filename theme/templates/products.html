@@ -1,0 +1,102 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{category_name}}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+  </head>
+
+  <body class="bg-gray-50 font-serif leading-normal tracking-normal">
+
+    <header class="relative bg-white">
+      <p
+        class="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
+      >
+        Get free delivery on orders over ₹ 1000
+      </p>
+
+      <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="border-b border-gray-200">
+          <div class="flex h-16 items-center">
+            <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
+
+            <!-- Logo -->
+            <div class="ml-4 flex lg:ml-0">
+              <a href="">
+                <img
+                  class="h-8 w-auto"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  alt=""
+                />
+              </a>
+            </div>
+
+            <!-- Flyout menus -->
+            <div class="hidden lg:ml-8 lg:block lg:self-stretch">
+              <div class="flex h-full space-x-8">
+                {%for i in categories%}
+                <div   class="relative flex">
+                  <button
+                    type="button"
+                    class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                    aria-expanded="false"
+                    onclick="document.location='/products/?category={{i.id}}'"
+                  >
+                    {{i.name}}
+                  </button>
+                </div>
+                {%endfor%}
+
+
+            </div>
+
+     
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="bg-white">
+      <div
+        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
+      >
+        <h2 class="text-2xl  tracking-tight text-gray-900">
+          Products
+        </h2>
+
+        <div
+          class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+        >
+          {%for i in products%}
+          <div  class="group relative">
+            <div
+            
+              class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
+            >
+              {% load static %}
+              <img src="../{{i.image}}" class="object-contain w-full h-full" />
+            </div>
+            <div class="mt-4 flex justify-between">
+              <div>
+                <h3 class="text-sm text-gray-700">
+                  <a href="/products/view/?id={{i.id}}">
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    {{ i.name }}
+                  </a>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">{{ i.description }}</p>
+              </div>
+              <p class="text-sm font-medium text-gray-900">₹{{ i.price }}</p>
+            </div>
+          </div>
+
+          {%endfor%}
+
+          <!-- More products... -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
